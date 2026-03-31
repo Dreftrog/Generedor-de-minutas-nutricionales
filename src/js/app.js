@@ -9,7 +9,7 @@ import '../css/components.css';
 import '../css/layout.css';
 
 // Importar modulos
-import { getApiKey, saveApiKey, getTheme, saveTheme, getHistory, saveToHistory, deleteFromHistory, getHistoryEntry } from './storage.js';
+import { getTheme, saveTheme, getHistory, saveToHistory, deleteFromHistory, getHistoryEntry } from './storage.js';
 import { initWizard, resetWizard } from './wizard.js';
 import { generateMinuta, cancelGeneration } from './gemini.js';
 import { renderMinuta, getCurrentMinuta, setCurrentMinuta } from './minutaView.js';
@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initWizard(handleGenerate);
   initSettingsPage();
-  initModalHandlers();
   renderHistoryList();
 });
 
@@ -153,12 +152,6 @@ function switchMinutaView(view) {
 // Generacion de minuta
 // ============================
 async function handleGenerate(formData) {
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    openApiKeyModal(() => handleGenerate(formData));
-    return;
-  }
-
   navigateTo('loading');
 
   try {
@@ -269,24 +262,9 @@ function handleDownloadPDF() {
 // Settings
 // ============================
 function initSettingsPage() {
-  // Cargar API key
-  const apiKeyInput = document.getElementById('api-key-input');
-  const savedKey = getApiKey();
-  if (savedKey) {
-    apiKeyInput.value = savedKey;
-  }
-
-  // Guardar API key
-  document.getElementById('btn-save-api-key').addEventListener('click', () => {
-    const key = apiKeyInput.value.trim();
-    if (key) {
-      saveApiKey(key);
-      showToast('API Key guardada', 'success');
-    } else {
-      showToast('Ingresa una API Key valida', 'error');
-    }
-  });
+  // Settings ya no maneja API key (viene del .env)
 }
+
 
 function renderHistoryList() {
   const history = getHistory();
@@ -368,43 +346,4 @@ function renderHistoryList() {
 }
 
 // ============================
-// Modal API Key
-// ============================
-let modalCallback = null;
 
-function initModalHandlers() {
-  document.getElementById('btn-close-modal').addEventListener('click', closeApiKeyModal);
-  document.getElementById('btn-modal-cancel').addEventListener('click', closeApiKeyModal);
-  document.getElementById('btn-modal-save-key').addEventListener('click', () => {
-    const key = document.getElementById('modal-api-key-input').value.trim();
-    if (key) {
-      saveApiKey(key);
-      document.getElementById('api-key-input').value = key;
-      closeApiKeyModal();
-      showToast('API Key guardada', 'success');
-      if (modalCallback) {
-        modalCallback();
-        modalCallback = null;
-      }
-    } else {
-      showToast('Ingresa una API Key valida', 'error');
-    }
-  });
-
-  // Cerrar modal al hacer click fuera
-  document.getElementById('modal-api-key').addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) {
-      closeApiKeyModal();
-    }
-  });
-}
-
-function openApiKeyModal(callback) {
-  modalCallback = callback;
-  document.getElementById('modal-api-key').classList.add('active');
-}
-
-function closeApiKeyModal() {
-  document.getElementById('modal-api-key').classList.remove('active');
-  modalCallback = null;
-}

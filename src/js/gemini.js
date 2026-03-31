@@ -3,9 +3,9 @@
  */
 
 import { calcularTMB, calcularTDEE, sleep } from './utils.js';
-import { getApiKey } from './storage.js';
 
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent';
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
 
 let abortController = null;
 
@@ -17,8 +17,7 @@ let abortController = null;
  * @returns {Object} Minuta completa
  */
 export async function generateMinuta(clientData, onProgress, onStatusChange) {
-  const apiKey = getApiKey();
-  if (!apiKey) throw new Error('API Key no configurada');
+  const apiKey = API_KEY;
 
   abortController = new AbortController();
 
