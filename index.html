@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriPlan Pro - Generador profesional de minutas nutricionales mensuales personalizadas con inteligencia artificial." />
+  <title>NutriPlan Pro - Generador de Minutas Nutricionales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+</head>
+<body>
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="navbar-brand" id="nav-home-link">
+        <div class="navbar-logo">N</div>
+        <span class="navbar-title">NutriPlan Pro</span>
+      </a>
+      <div class="navbar-actions">
+        <button class="btn btn-ghost btn-icon" id="btn-history" data-tooltip="Historial" title="Historial">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </button>
+        <button class="btn btn-ghost btn-icon" id="btn-settings" data-tooltip="Configuracion" title="Configuracion">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <button class="btn btn-ghost btn-icon" id="btn-theme-toggle" data-tooltip="Cambiar tema" title="Cambiar tema">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="theme-icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="theme-icon-sun" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== SCREEN: HOME ===== -->
+  <section class="screen active" id="screen-home">
+    <div class="container">
+      <div class="hero">
+        <div class="hero-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Inteligencia artificial aplicada a la nutricion
+        </div>
+        <h1>Genera minutas nutricionales <span class="text-gradient">profesionales</span></h1>
+        <p>Crea planes alimenticios mensuales personalizados y detallados para tus clientes. 30 dias completos con calorias, macronutrientes y lista de compras.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg" id="btn-new-minuta">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Crear Nueva Minuta
+          </button>
+        </div>
+      </div>
+
+      <div class="features-grid stagger-children">
+        <div class="card feature-card animate-fade-in-up">
+          <div class="icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+          </div>
+          <h4>Personalizada</h4>
+          <p>Cada minuta se adapta a las necesidades, preferencias y restricciones del cliente.</p>
+        </div>
+        <div class="card feature-card animate-fade-in-up">
+          <div class="icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h4>30 Dias Completos</h4>
+          <p>Plan alimenticio completo con desayuno, almuerzo, cena y colaciones para cada dia.</p>
+        </div>
+        <div class="card feature-card animate-fade-in-up">
+          <div class="icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h4>Descarga en PDF</h4>
+          <p>Exporta la minuta en formato PDF profesional con estilo de horario, lista para entregar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN: WIZARD ===== -->
+  <section class="screen" id="screen-wizard">
+    <div class="container">
+      <!-- Wizard Progress -->
+      <div class="wizard-progress" id="wizard-progress">
+        <div class="wizard-step active" data-step="1">
+          <div class="step-indicator">1</div>
+          <span class="step-label">Datos del Cliente</span>
+        </div>
+        <div class="step-connector" id="connector-1-2"></div>
+        <div class="wizard-step" data-step="2">
+          <div class="step-indicator">2</div>
+          <span class="step-label">Preferencias</span>
+        </div>
+        <div class="step-connector" id="connector-2-3"></div>
+        <div class="wizard-step" data-step="3">
+          <div class="step-indicator">3</div>
+          <span class="step-label">Salud</span>
+        </div>
+        <div class="step-connector" id="connector-3-4"></div>
+        <div class="wizard-step" data-step="4">
+          <div class="step-indicator">4</div>
+          <span class="step-label">Revision</span>
+        </div>
+      </div>
+
+      <div class="wizard-container">
+        <!-- Step 1: Datos del Cliente -->
+        <div class="wizard-panel active" id="wizard-step-1">
+          <h2>Datos del Cliente</h2>
+          <p>Ingresa la informacion basica del cliente para calcular su requerimiento calorico.</p>
+
+          <div class="card" style="padding: var(--space-8);">
+            <div class="wizard-form-grid">
+              <div class="form-group full-width">
+                <label class="form-label" for="client-name">Nombre del cliente <span class="required">*</span></label>
+                <input type="text" class="form-input" id="client-name" placeholder="Nombre completo" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="client-age">Edad <span class="required">*</span></label>
+                <input type="number" class="form-input" id="client-age" placeholder="Ej: 35" min="10" max="100" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="client-sex">Sexo <span class="required">*</span></label>
+                <select class="form-input" id="client-sex" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="masculino">Masculino</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="client-weight">Peso actual (kg) <span class="required">*</span></label>
+                <input type="number" class="form-input" id="client-weight" placeholder="Ej: 80" min="30" max="300" step="0.1" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="client-height">Estatura (cm) <span class="required">*</span></label>
+                <input type="number" class="form-input" id="client-height" placeholder="Ej: 170" min="100" max="250" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="client-goal-weight">Peso objetivo (kg) <span class="required">*</span></label>
+                <input type="number" class="form-input" id="client-goal-weight" placeholder="Ej: 70" min="30" max="300" step="0.1" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Objetivo</label>
+                <select class="form-input" id="client-goal-type">
+                  <option value="bajar">Bajar de peso</option>
+                  <option value="mantener">Mantener peso</option>
+                  <option value="subir">Subir de peso</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Nivel de actividad fisica <span class="required">*</span></label>
+                <div class="activity-selector" id="activity-selector">
+                  <label class="activity-option" data-value="bajo">
+                    <input type="radio" name="activity" value="bajo" />
+                    <div class="activity-icon">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <span class="activity-label">Bajo</span>
+                    <span class="activity-desc">Sedentario o poco ejercicio</span>
+                  </label>
+                  <label class="activity-option" data-value="moderado">
+                    <input type="radio" name="activity" value="moderado" />
+                    <div class="activity-icon">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <span class="activity-label">Moderado</span>
+                    <span class="activity-desc">Ejercicio 3-5 veces/semana</span>
+                  </label>
+                  <label class="activity-option" data-value="alto">
+                    <input type="radio" name="activity" value="alto" />
+                    <div class="activity-icon">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <span class="activity-label">Alto</span>
+                    <span class="activity-desc">Ejercicio diario o intenso</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button class="btn btn-secondary" id="btn-wizard-cancel">Cancelar</button>
+            <button class="btn btn-primary" id="btn-step-1-next">
+              Siguiente
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Preferencias -->
+        <div class="wizard-panel" id="wizard-step-2">
+          <h2>Preferencias Alimentarias</h2>
+          <p>Define las preferencias y restricciones alimentarias del cliente.</p>
+
+          <div class="card" style="padding: var(--space-8);">
+            <div class="wizard-form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Tipo de alimentacion</label>
+                <div class="chip-group" id="diet-type-chips">
+                  <label class="chip" data-value="omnivoro"><input type="checkbox" /> Omnivoro</label>
+                  <label class="chip" data-value="vegetariano"><input type="checkbox" /> Vegetariano</label>
+                  <label class="chip" data-value="vegano"><input type="checkbox" /> Vegano</label>
+                  <label class="chip" data-value="pescetariano"><input type="checkbox" /> Pescetariano</label>
+                  <label class="chip" data-value="cetogenica"><input type="checkbox" /> Cetogenica</label>
+                  <label class="chip" data-value="mediterranea"><input type="checkbox" /> Mediterranea</label>
+                  <label class="chip" data-value="sin gluten"><input type="checkbox" /> Sin Gluten</label>
+                  <label class="chip" data-value="sin lactosa"><input type="checkbox" /> Sin Lactosa</label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Alimentos que le gustan</label>
+                <div class="tags-input-container" id="likes-tags-container">
+                  <input type="text" class="tags-input" id="likes-tags-input" placeholder="Escribe y presiona Enter..." />
+                </div>
+                <span class="form-hint">Ingresa cada alimento y presiona Enter para agregarlo</span>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Alimentos que NO le gustan</label>
+                <div class="tags-input-container" id="dislikes-tags-container">
+                  <input type="text" class="tags-input" id="dislikes-tags-input" placeholder="Escribe y presiona Enter..." />
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Alergias alimentarias</label>
+                <div class="tags-input-container" id="allergies-tags-container">
+                  <input type="text" class="tags-input" id="allergies-tags-input" placeholder="Escribe y presiona Enter..." />
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Excepciones</label>
+                <textarea class="form-input" id="exceptions" placeholder="Ej: Come pollo pero no carne roja, consume huevos pero no leche..." rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button class="btn btn-secondary" id="btn-step-2-prev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Anterior
+            </button>
+            <button class="btn btn-primary" id="btn-step-2-next">
+              Siguiente
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Salud -->
+        <div class="wizard-panel" id="wizard-step-3">
+          <h2>Condiciones de Salud</h2>
+          <p>Selecciona o agrega las condiciones de salud relevantes del cliente.</p>
+
+          <div class="card" style="padding: var(--space-8);">
+            <div class="wizard-form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Condiciones conocidas</label>
+                <div class="chip-group" id="health-chips">
+                  <label class="chip" data-value="diabetes tipo 1"><input type="checkbox" /> Diabetes Tipo 1</label>
+                  <label class="chip" data-value="diabetes tipo 2"><input type="checkbox" /> Diabetes Tipo 2</label>
+                  <label class="chip" data-value="resistencia a la insulina"><input type="checkbox" /> Resistencia a la Insulina</label>
+                  <label class="chip" data-value="hipertension"><input type="checkbox" /> Hipertension</label>
+                  <label class="chip" data-value="hipotiroidismo"><input type="checkbox" /> Hipotiroidismo</label>
+                  <label class="chip" data-value="hipertiroidismo"><input type="checkbox" /> Hipertiroidismo</label>
+                  <label class="chip" data-value="colesterol alto"><input type="checkbox" /> Colesterol Alto</label>
+                  <label class="chip" data-value="trigliceridos altos"><input type="checkbox" /> Trigliceridos Altos</label>
+                  <label class="chip" data-value="sindrome de ovario poliquistico"><input type="checkbox" /> SOP</label>
+                  <label class="chip" data-value="enfermedad celiaca"><input type="checkbox" /> Enfermedad Celiaca</label>
+                  <label class="chip" data-value="gastritis"><input type="checkbox" /> Gastritis</label>
+                  <label class="chip" data-value="colon irritable"><input type="checkbox" /> Colon Irritable</label>
+                  <label class="chip" data-value="anemia"><input type="checkbox" /> Anemia</label>
+                  <label class="chip" data-value="higado graso"><input type="checkbox" /> Higado Graso</label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Otras condiciones</label>
+                <textarea class="form-input" id="other-health" placeholder="Describe otras condiciones de salud relevantes..." rows="3"></textarea>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Medicamentos relevantes (opcional)</label>
+                <textarea class="form-input" id="medications" placeholder="Ej: Metformina 850mg, Levotiroxina 50mcg..." rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button class="btn btn-secondary" id="btn-step-3-prev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Anterior
+            </button>
+            <button class="btn btn-primary" id="btn-step-3-next">
+              Siguiente
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 4: Revision -->
+        <div class="wizard-panel" id="wizard-step-4">
+          <h2>Revision y Confirmacion</h2>
+          <p>Verifica que todos los datos del cliente sean correctos antes de generar la minuta.</p>
+
+          <div class="card" style="padding: var(--space-8);">
+            <div class="review-section">
+              <h4>
+                Datos del Cliente
+                <button class="btn btn-ghost btn-sm" data-edit-step="1">Editar</button>
+              </h4>
+              <div class="review-grid" id="review-client-data"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="review-section">
+              <h4>
+                Preferencias Alimentarias
+                <button class="btn btn-ghost btn-sm" data-edit-step="2">Editar</button>
+              </h4>
+              <div id="review-preferences"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="review-section">
+              <h4>
+                Condiciones de Salud
+                <button class="btn btn-ghost btn-sm" data-edit-step="3">Editar</button>
+              </h4>
+              <div id="review-health"></div>
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button class="btn btn-secondary" id="btn-step-4-prev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Anterior
+            </button>
+            <button class="btn btn-primary btn-lg" id="btn-generate">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Generar Minuta
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN: LOADING ===== -->
+  <section class="screen" id="screen-loading">
+    <div class="container">
+      <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <h3 class="loading-text" id="loading-title">Generando minuta nutricional...</h3>
+        <p class="loading-subtext" id="loading-subtitle">Calculando requerimiento calorico</p>
+        <div style="width: 100%; max-width: 400px;">
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="loading-progress" style="width: 0%"></div>
+          </div>
+          <p class="text-xs text-muted" style="margin-top: var(--space-2); text-align: center;" id="loading-week-text">Preparando...</p>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="btn-cancel-generation" style="margin-top: var(--space-4);">Cancelar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN: MINUTA VIEW ===== -->
+  <section class="screen" id="screen-minuta">
+    <div class="container">
+      <!-- Header -->
+      <div class="minuta-header">
+        <div>
+          <h2 id="minuta-title">Minuta Nutricional</h2>
+          <p class="text-sm text-muted" id="minuta-date"></p>
+        </div>
+        <div class="minuta-header-actions">
+          <button class="btn btn-secondary" id="btn-new-from-minuta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nueva Minuta
+          </button>
+          <button class="btn btn-primary" id="btn-download-pdf">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Client Summary -->
+      <div class="minuta-client-summary" id="minuta-client-summary"></div>
+
+      <!-- View Toggle & Week Tabs -->
+      <div class="view-toggle">
+        <button class="btn btn-sm tab active" id="view-schedule" data-view="schedule">Plan Alimenticio</button>
+        <button class="btn btn-sm tab" id="view-shopping" data-view="shopping">Lista de Compras</button>
+        <button class="btn btn-sm tab" id="view-recommendations" data-view="recommendations">Recomendaciones</button>
+      </div>
+
+      <!-- Schedule View -->
+      <div id="minuta-schedule-view">
+        <div class="tabs week-tabs" id="week-tabs"></div>
+        <div class="days-grid" id="days-grid"></div>
+      </div>
+
+      <!-- Shopping List View -->
+      <div id="minuta-shopping-view" style="display: none;">
+        <div class="tabs week-tabs" id="shopping-week-tabs"></div>
+        <div class="shopping-list-container" id="shopping-list-container"></div>
+      </div>
+
+      <!-- Recommendations View -->
+      <div id="minuta-recommendations-view" style="display: none;">
+        <div class="recommendations-grid" id="recommendations-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN: SETTINGS ===== -->
+  <section class="screen" id="screen-settings">
+    <div class="container">
+      <div class="settings-section">
+        <h2 style="margin-bottom: var(--space-8);">Configuracion</h2>
+
+        <div class="settings-group">
+          <h3>API Key de Gemini</h3>
+          <p class="text-sm text-muted" style="margin-bottom: var(--space-4);">Ingresa tu API Key de Google Gemini para habilitar la generacion de minutas. Puedes obtener una en <a href="https://aistudio.google.com/" target="_blank" rel="noopener">aistudio.google.com</a></p>
+          <div class="form-group">
+            <label class="form-label" for="api-key-input">API Key</label>
+            <div style="display: flex; gap: var(--space-3);">
+              <input type="password" class="form-input" id="api-key-input" placeholder="AIza..." />
+              <button class="btn btn-primary" id="btn-save-api-key">Guardar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="settings-group">
+          <h3>Historial de Minutas</h3>
+          <div id="history-container">
+            <div class="empty-state" id="history-empty">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <h3>Sin historial</h3>
+              <p>Las minutas generadas se guardan automaticamente aqui.</p>
+            </div>
+            <div class="history-list" id="history-list"></div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="settings-group">
+          <h3>Apariencia</h3>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) 0;">
+            <div>
+              <p class="font-medium" style="color: var(--text-primary);">Tema oscuro</p>
+              <p class="text-sm text-muted">Alterna entre tema claro y oscuro</p>
+            </div>
+            <button class="btn btn-secondary" id="btn-theme-toggle-settings">Cambiar Tema</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== API KEY MODAL ===== -->
+  <div class="modal-overlay" id="modal-api-key">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>API Key Requerida</h3>
+        <button class="btn btn-ghost btn-icon" id="btn-close-modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <p class="text-muted" style="margin-bottom: var(--space-6);">Para generar minutas necesitas una API Key de Google Gemini. Puedes obtener una gratuitamente en <a href="https://aistudio.google.com/" target="_blank" rel="noopener">aistudio.google.com</a></p>
+      <div class="form-group" style="margin-bottom: var(--space-6);">
+        <label class="form-label" for="modal-api-key-input">API Key</label>
+        <input type="password" class="form-input" id="modal-api-key-input" placeholder="AIza..." />
+      </div>
+      <div style="display: flex; gap: var(--space-3); justify-content: flex-end;">
+        <button class="btn btn-secondary" id="btn-modal-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="btn-modal-save-key">Guardar y Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>NutriPlan Pro - Generador de minutas nutricionales profesionales</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/js/app.js"></script>
+</body>
+</html>
